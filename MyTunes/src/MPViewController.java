@@ -40,20 +40,6 @@ public class MPViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*private void openDeleteWindow() {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("DeleteView.fxml"));
-                Parent root = loader.load();
-
-                Stage stage = new Stage();
-                stage.setTitle("New Playlist");
-                stage.setScene(new Scene(root));
-
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
     }
 
     @FXML
