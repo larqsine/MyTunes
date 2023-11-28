@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="217.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EditViewController">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="261.0" prefWidth="384.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EditViewController">
+   <children>
+      <TextField layoutX="94.0" layoutY="65.0" prefHeight="37.0" prefWidth="243.0" />
+      <Text layoutX="37.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="37.294921875" />
+      <Button layoutX="291.0" layoutY="196.0" mnemonicParsing="false" onAction="#saveButtonClicked" prefHeight="25.0" prefWidth="52.0" text="Save" />
+      <Button layoutX="216.0" layoutY="196.0" mnemonicParsing="false" onAction="#cancelButtonClicked" text="Cancel" />
+      <Text layoutX="146.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New/Edit Playlist" wrappingWidth="91.505859375" />
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
 </AnchorPane>

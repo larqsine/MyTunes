@@ -11,7 +11,7 @@ import java.io.IOException;
 public class MPViewController {
 
     @FXML
-    private void openEditWindow() {
+    public void openEditWindow() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("EditView.fxml"));
             Parent root = loader.load();
