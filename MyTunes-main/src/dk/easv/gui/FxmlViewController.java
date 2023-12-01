@@ -1,7 +1,7 @@
 package dk.easv.gui;
 
 import dk.easv.BE.SongClass;
-import dk.easv.gui.songs.DeleteSong;
+import dk.easv.gui.songs.DeleteSongController;
 import dk.easv.gui.songs.EditSongController;
 import dk.easv.gui.songs.NewSongController;
 import javafx.beans.value.ChangeListener;
@@ -53,7 +53,7 @@ public class FxmlViewController implements Initializable {
     private File directory;
     private File[] files;
     public ArrayList<File> songs;
-    private DeleteSong d;
+    private DeleteSongController d;
 
     private Media media;
     private MediaPlayer mediaPlayer;
@@ -161,15 +161,15 @@ public class FxmlViewController implements Initializable {
         stage.setScene(new Scene(root2));
         stage.show();
     }
-    public void setDeliteSong(DeleteSong deliteSong){
+    public void setDeliteSong(DeleteSongController deliteSong){
         this.d=deliteSong;
     }
 
     public void ClickDeleteBTN(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("songs/DeleteSong.fxml"));
         Parent root3 = (Parent) fxmlLoader.load();
-        DeleteSong deleteSong= fxmlLoader.getController();
-        deleteSong.setFxmlViewController(this);
+        DeleteSongController deleteSongController= fxmlLoader.getController();
+        deleteSongController.setFxmlViewController(this);
         Stage stage = new Stage();
         stage.setScene(new Scene(root3));
         stage.show();
