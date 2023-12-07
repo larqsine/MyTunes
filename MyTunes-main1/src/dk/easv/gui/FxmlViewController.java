@@ -1,6 +1,7 @@
 package dk.easv.gui;
 
 import dk.easv.BE.SongClass;
+import dk.easv.BLL.SongBL;
 import dk.easv.gui.songs.DeleteSongController;
 import dk.easv.gui.songs.EditSongController;
 import dk.easv.gui.songs.NewSongController;
@@ -24,10 +25,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class FxmlViewController implements Initializable {
 
@@ -53,12 +51,11 @@ public class FxmlViewController implements Initializable {
     private File directory;
     private File[] files;
     public ArrayList<File> songs;
-    private DeleteSongController d;
+
 
     private Media media;
     private MediaPlayer mediaPlayer;
     private int songNumber;
-    private JFXPanel stage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -87,6 +84,8 @@ public class FxmlViewController implements Initializable {
         TableViewTime.setCellValueFactory(new PropertyValueFactory<>("Time"));
         songList =FXCollections.observableArrayList();
         tableView.setItems(songList);
+        SongBL bl= new SongBL();
+        loadData();
 
     }
 
@@ -191,4 +190,10 @@ public class FxmlViewController implements Initializable {
     public void Search(ActionEvent actionEvent) {
 
     }
+
+     public void loadData(){
+        SongBL s=new SongBL();
+         List<SongClass> songs = s.getAllSongs();
+        TableViewTitle.getTableView().getItems().addAll(songs);
+     }
 }

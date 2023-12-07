@@ -1,7 +1,10 @@
 package dk.easv.gui;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dk.easv.DAL.ConnectionMenager;
 import javafx.application.Application;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -26,41 +29,10 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        SQLServerDataSource ds = new SQLServerDataSource();
-        ds.setDatabaseName("CSe23B_28_MyTunes");
-        ds.setUser("CSe2023b_e_28");
-        ds.setPassword("CSe2023bE28#23");
-        ds.setPortNumber(1433);
-        ds.setServerName("10.176.111.34");
-        ds.setTrustServerCertificate(true);
+    public static void main(String[] args) throws SQLServerException {
 
-
-
-
-
-        System.out.println("Done");
-
-
-        try(
-                Connection con = ds.getConnection())
-        {
-            String sql = "SELECT * FROM Playlists";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while(rs.next()){
-                String Name         = rs.getString("Name");
-                int Songs    = rs.getInt("Songs");
-                double Time    = rs.getDouble("Time");
-                System.out.println(Name + ", "+ Songs + ", " + Time);
-            }
-        }
-
-        catch (
-                SQLException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        ConnectionMenager connectionMenager= new ConnectionMenager();
+        connectionMenager.conect();
         launch(args);
     }
 }

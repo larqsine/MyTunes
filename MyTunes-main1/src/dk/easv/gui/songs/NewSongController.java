@@ -4,8 +4,6 @@ import dk.easv.BLL.SongBL;
 import dk.easv.gui.FxmlViewController;
 import dk.easv.BE.SongClass;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -15,6 +13,8 @@ import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
+
+import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.title;
 
 public class NewSongController {
     public Button BTNCancleNewSong;
@@ -55,6 +55,7 @@ public class NewSongController {
         songClass.setCategory(CategoryInput.getText());
         songClass.setTime(Double.parseDouble(TimeInput.getText()));
         f.addSong(songClass);
+        songBL.saveSong(new SongClass(String.valueOf(TitleInput.getText()),String.valueOf(ArtistInput.getText()),String.valueOf(CategoryInput.getText()),Double.parseDouble(String.valueOf(TimeInput.getText())),String.valueOf(FileInput.getText())));
         Stage currentStage = (Stage) BTNCancleNewSong.getScene().getWindow();
         currentStage.close();
 
@@ -62,8 +63,12 @@ public class NewSongController {
     }
 
 
+
     public void ClickChoose(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("MP3 Files","*.mp3*","*.wav","*.wave")
+        );
         Window SongClass = null;
         fileChooser.setInitialFileName(String.valueOf(new File("C:/Music")));
         File selectedfile = fileChooser.showOpenDialog(SongClass);
