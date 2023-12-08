@@ -54,8 +54,9 @@ public class NewSongController {
         songClass.setArtist(ArtistInput.getText());
         songClass.setCategory(CategoryInput.getText());
         songClass.setTime(Double.parseDouble(TimeInput.getText()));
+        songClass.setFile(FileInput.getText());
         f.addSong(songClass);
-        songBL.saveSong(new SongClass(String.valueOf(TitleInput.getText()),String.valueOf(ArtistInput.getText()),String.valueOf(CategoryInput.getText()),Double.parseDouble(String.valueOf(TimeInput.getText())),String.valueOf(FileInput.getText())));
+        songBL.saveSong(songClass);
         Stage currentStage = (Stage) BTNCancleNewSong.getScene().getWindow();
         currentStage.close();
 

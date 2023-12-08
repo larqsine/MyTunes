@@ -1,24 +1,21 @@
 package dk.easv.BE;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-
 public class SongClass {
-    private String Title;
-    private String  Artist;
-    private String  Category;
-    private Double Time;
+    private String title;
+    private String artist;
+    private String category;
+    private Double time;
 
-    private String File;
+    private String file;
 
 
 
     public SongClass(String title, String artist, String category, Double time, String file) {
-       this.Title = title;
-        this.Artist = artist;
-        this.Category = category;
-        this.Time = time;
-        this.File = file;
+       this.title = title;
+        this.artist = artist;
+        this.category = category;
+        this.time = time;
+        this.file = file;
     }
 
     public SongClass() {
@@ -26,41 +23,41 @@ public class SongClass {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        this.Title = new String(title);
+        this.title = title;
     }
 
     public String getArtist() {
-        return Artist;
+        return artist;
     }
    public void setArtist(String artist){
-        this.Artist=new String(artist);
+        this.artist =artist;
    }
 
     public String getCategory() {
-        return Category;
+        return category;
     }
 
     public void setCategory(String category) {
-        this.Category=new String(category);
+        this.category =category;
     }
 
     public Double getTime() {
-        return Time;
+        return time;
     }
 
     public void setTime(double time) {
-        this.Time = time;
+        this.time = time;
     }
 
     public String getFile() {
-        return File;
+        return file;
     }
 
     public void setFile(String file) {
-       this.File= new String(file);
+       this.file = file;
     }
 }

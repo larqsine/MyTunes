@@ -57,9 +57,17 @@ public class FxmlViewController implements Initializable {
     private MediaPlayer mediaPlayer;
     private int songNumber;
 
+    private SongBL s;
+
+    public void setSongBL(SongBL songBL) {
+
+        this.s = songBL;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //INITIALIZE
+        setSongBL(new SongBL());
         directory = new File("Music");
         files = directory.listFiles();
         songs = new ArrayList<>(Arrays.asList(files));
@@ -78,14 +86,8 @@ public class FxmlViewController implements Initializable {
             }
         });
         // Seting info in table view
-        TableViewTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        TableViewArtist.setCellValueFactory(new PropertyValueFactory<>("Artist"));
-        TableViewCategory.setCellValueFactory(new PropertyValueFactory<>("Category"));
-        TableViewTime.setCellValueFactory(new PropertyValueFactory<>("Time"));
-        songList =FXCollections.observableArrayList();
-        tableView.setItems(songList);
-        SongBL bl= new SongBL();
         loadData();
+
 
     }
 
@@ -192,8 +194,13 @@ public class FxmlViewController implements Initializable {
     }
 
      public void loadData(){
-        SongBL s=new SongBL();
-         List<SongClass> songs = s.getAllSongs();
-        TableViewTitle.getTableView().getItems().addAll(songs);
+
+         TableViewTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
+         TableViewArtist.setCellValueFactory(new PropertyValueFactory<>("Artist"));
+         TableViewCategory.setCellValueFactory(new PropertyValueFactory<>("Category"));
+         TableViewTime.setCellValueFactory(new PropertyValueFactory<>("Time"));
+         tableView.getColumns().addAll();
+         tableView.setItems(s.getSonglist());
+
      }
 }

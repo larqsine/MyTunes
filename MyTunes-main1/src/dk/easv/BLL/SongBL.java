@@ -3,11 +3,15 @@ package dk.easv.BLL;
 import dk.easv.BE.SongClass;
 import dk.easv.DAL.SongDAO;
 import dk.easv.gui.songs.NewSongController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 
 import java.util.List;
 
 public class SongBL {
+
+    private ObservableList<SongClass> songlist;
 
     private int savenumber = 0;
 
@@ -34,13 +38,18 @@ public class SongBL {
  }
 
  public void saveSong(SongClass s){
-     if(savenumber == 1){
+
          songDAO.createSong(s);
      }
 
- }
+
  public List<SongClass> getAllSongs(){
      return songDAO.getAllSongs();
  }
 
+ public ObservableList<SongClass> getSonglist(){
+     songlist= FXCollections.observableArrayList();
+     songlist.addAll(getAllSongs());
+     return songlist;
+ }
 }
