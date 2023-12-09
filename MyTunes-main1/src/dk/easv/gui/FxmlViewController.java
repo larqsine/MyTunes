@@ -2,6 +2,7 @@ package dk.easv.gui;
 
 import dk.easv.BE.SongClass;
 import dk.easv.BLL.SongBL;
+import dk.easv.DAL.SongDAO;
 import dk.easv.gui.songs.DeleteSongController;
 import dk.easv.gui.songs.EditSongController;
 import dk.easv.gui.songs.NewSongController;
@@ -86,7 +87,9 @@ public class FxmlViewController implements Initializable {
             }
         });
         // Seting info in table view
+        songList = FXCollections.observableArrayList();
         loadData();
+
 
 
     }
@@ -184,6 +187,8 @@ public class FxmlViewController implements Initializable {
             allSongs = tableView.getItems();
             singleSong = tableView.getSelectionModel().getSelectedItems();
             singleSong.forEach(allSongs::remove);
+            SongDAO s=new SongDAO();
+            //s.deleteSong();
         }
 
 

@@ -68,12 +68,21 @@ public class SongDAO implements ISongDAO{
     }
 
     @Override
-    public void updateSong(NewSongController s) {
+    public void updateSong(SongClass s) {
 
     }
 
     @Override
     public void deleteSong(int id) {
+        try(Connection con = cm.getConnection())
+        {
+            String sql = "DELETE FROM Song WHERE id=?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
