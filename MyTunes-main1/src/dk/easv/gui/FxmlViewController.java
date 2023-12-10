@@ -188,11 +188,12 @@ public class FxmlViewController implements Initializable {
             singleSong = tableView.getSelectionModel().getSelectedItems();
             for (SongClass selectedSong : singleSong) {
                 SongDAO s = new SongDAO();
-                s.deleteSong(selectedSong.getTitle());
+                s.deleteSong(selectedSong.getTitle(), selectedSong.getArtist());
             }
 
             // Remove selected songs from the table view
             allSongs.removeAll(singleSong);
+            tableView.refresh();
         }
 
 

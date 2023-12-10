@@ -73,12 +73,13 @@ public class SongDAO implements ISongDAO{
     }
 
     @Override
-    public void deleteSong(String title) {
+    public void deleteSong(String title, String artist ) {
         try(Connection con = cm.getConnection())
         {
-            String sql = "DELETE FROM Song WHERE Title=?";
+            String sql = "DELETE FROM Song WHERE Title=? AND Artist=?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, String.valueOf(title));
+            pstmt.setString(2, String.valueOf(artist));
             pstmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
