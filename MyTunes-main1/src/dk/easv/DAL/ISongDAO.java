@@ -10,7 +10,7 @@ public interface ISongDAO {
     public SongClass getSong(int id);
     public void createSong(SongClass s);
     public void updateSong(SongClass s);
-    public void deleteSong(int id);
+    public void deleteSong(String s);
 
     public List<SongClass> getAllSongs();
 

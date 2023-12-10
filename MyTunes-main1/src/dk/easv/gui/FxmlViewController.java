@@ -186,9 +186,13 @@ public class FxmlViewController implements Initializable {
             ObservableList<SongClass> allSongs, singleSong;
             allSongs = tableView.getItems();
             singleSong = tableView.getSelectionModel().getSelectedItems();
-            singleSong.forEach(allSongs::remove);
-            SongDAO s=new SongDAO();
-            //s.deleteSong();
+            for (SongClass selectedSong : singleSong) {
+                SongDAO s = new SongDAO();
+                s.deleteSong(selectedSong.getTitle());
+            }
+
+            // Remove selected songs from the table view
+            allSongs.removeAll(singleSong);
         }
 
 

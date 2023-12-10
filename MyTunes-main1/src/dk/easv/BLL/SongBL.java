@@ -13,7 +13,7 @@ public class SongBL {
 
     private ObservableList<SongClass> songlist;
 
-    private int savenumber = 0;
+
 
     SongDAO songDAO=new SongDAO();
 
@@ -23,11 +23,11 @@ public class SongBL {
          if (input.getText().isEmpty()) {
              input.setText("invalid " + fieldLabel.toLowerCase());
              System.out.println("You set an invalid " + fieldLabel + ". " + fieldLabel + " has to contain a value.");
-             savenumber = 0;
+
          }
          if(input.getText().length()>0){
              input.getText().trim();
-             savenumber=1;
+
 
 
 
