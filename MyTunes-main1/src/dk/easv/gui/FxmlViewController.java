@@ -10,6 +10,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -90,13 +92,11 @@ public class FxmlViewController implements Initializable {
         songList = FXCollections.observableArrayList();
         loadData();
 
+        //Serach Bar
+        search();
 
 
-    }
 
-    public void addSong(SongClass song){
-
-        songList.add(song);
     }
 
     @FXML
@@ -186,22 +186,17 @@ public class FxmlViewController implements Initializable {
             ObservableList<SongClass> allSongs, singleSong;
             allSongs = tableView.getItems();
             singleSong = tableView.getSelectionModel().getSelectedItems();
-            for (SongClass selectedSong : singleSong) {
-                SongDAO s = new SongDAO();
-                s.deleteSong(selectedSong.getTitle(), selectedSong.getArtist());
-            }
+            List<SongClass> allSongsList = new ArrayList<>(allSongs);
+            allSongsList.removeAll(singleSong);
 
-            // Remove selected songs from the table view
-            allSongs.removeAll(singleSong);
+            // Update the TableView
+            tableView.setItems(FXCollections.observableArrayList(allSongsList));
             tableView.refresh();
         }
 
 
     }
 
-    public void Search(ActionEvent actionEvent) {
-
-    }
 
      public void loadData(){
 
@@ -211,6 +206,36 @@ public class FxmlViewController implements Initializable {
          TableViewTime.setCellValueFactory(new PropertyValueFactory<>("Time"));
          tableView.getColumns().addAll();
          tableView.setItems(s.getSonglist());
+         tableView.refresh();
 
+     }
+
+     public void search(){
+         loadData();
+         FilteredList<SongClass> filteredSongs = new FilteredList<>(s.getSonglist(), b -> true);
+
+         SearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+             filteredSongs.setPredicate(songClass -> {
+                 if (newValue == null || newValue.isEmpty()) {
+                     return true;
+                 }
+
+                 String lowerCaseFilter = newValue.toLowerCase();
+
+                 String title = songClass.getTitle();
+                 String artist = songClass.getArtist();
+                 String category = songClass.getCategory();
+
+                 boolean titleMatches = title != null && title.toLowerCase().contains(lowerCaseFilter);
+                 boolean artistMatches = artist != null && artist.toLowerCase().contains(lowerCaseFilter);
+                 boolean categoryMatches = category != null && category.toLowerCase().contains(lowerCaseFilter);
+
+                 return titleMatches || artistMatches || categoryMatches;
+             });
+         });
+
+         SortedList<SongClass> sortedSongs = new SortedList<>(filteredSongs);
+         sortedSongs.comparatorProperty().bind(tableView.comparatorProperty());
+         tableView.setItems(sortedSongs);
      }
 }

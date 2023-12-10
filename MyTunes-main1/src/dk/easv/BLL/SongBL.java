@@ -41,6 +41,10 @@ public class SongBL {
 
          songDAO.createSong(s);
      }
+     public void updateSong(SongClass s){
+
+     songDAO.updateSong(s);
+     }
 
 
  public List<SongClass> getAllSongs(){

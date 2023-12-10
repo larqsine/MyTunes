@@ -1,6 +1,7 @@
 package dk.easv.gui.songs;
 
 import dk.easv.BLL.SongBL;
+import dk.easv.DAL.SongDAO;
 import dk.easv.gui.FxmlViewController;
 import dk.easv.BE.SongClass;
 import javafx.collections.ObservableList;
@@ -58,13 +59,12 @@ public class EditSongController {
             songClass.setArtist(ArtistInput.getText());
             songClass.setCategory(CategoryInput.getText());
             songClass.setTime(Double.parseDouble(TimeInput.getText()));
+            songClass.setFile(FileInput.getText());
+            songBL.updateSong(songClass);
             f.tableView.refresh();
             Stage currentStage = (Stage) BTNCancleEditSong.getScene().getWindow();
             currentStage.close();
         }
-
-
-
     }
 
     public void ClickChoose(ActionEvent actionEvent) {

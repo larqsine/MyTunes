@@ -34,8 +34,8 @@
       <VBox layoutX="205.0" layoutY="139.0" prefHeight="200.0" prefWidth="152.0" style="-fx-border-color: white;" />
       <Button focusTraversable="false" layoutX="371.0" layoutY="139.0" mnemonicParsing="false" text="&lt;-" />
       <Label layoutX="512.0" layoutY="22.0" text="Filter:" textFill="WHITE" />
-      <TextField fx:id="SearchBar" focusTraversable="false" layoutX="551.0" layoutY="17.0" prefHeight="26.0" prefWidth="89.0" />
-      <Button focusTraversable="false" layoutX="646.0" layoutY="17.0" mnemonicParsing="false" onAction="#Search" text="0-" />
+      <TextField fx:id="SearchBar" focusTraversable="false" layoutX="551.0" layoutY="17.0" prefHeight="26.0" prefWidth="89.0" promptText="Key Words" />
+      <Button focusTraversable="false" layoutX="646.0" layoutY="17.0" mnemonicParsing="false" text="0-" />
       <Button focusTraversable="false" layoutX="21.0" layoutY="351.0" mnemonicParsing="false" text="New" />
       <Button focusTraversable="false" layoutX="74.0" layoutY="351.0" mnemonicParsing="false" text="Edit" />
       <Button focusTraversable="false" layoutX="122.0" layoutY="351.0" mnemonicParsing="false" text="Delete" />

@@ -69,6 +69,30 @@ public class SongDAO implements ISongDAO{
 
     @Override
     public void updateSong(SongClass s) {
+        try (Connection con = cm.getConnection()) {
+            String sql = "UPDATE Song SET Title=?, Artist=?, Category=?, Time=?, [File]=? WHERE Title=? ";
+            try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+                pstmt.setString(1, String.valueOf(s.getTitle()));
+                pstmt.setString(2, String.valueOf(s.getArtist()));
+                pstmt.setString(3, String.valueOf(s.getCategory()));
+                // Check if time is not null before using it
+                if (s.getTime() != null) {
+                    pstmt.setDouble(4, Double.parseDouble(String.valueOf(s.getTime())));
+                } else {
+                    // Decide on a default value or behavior when time is null
+                    pstmt.setNull(4, java.sql.Types.DOUBLE);
+                }
+
+                pstmt.setString(5,String.valueOf(s.getFile()));
+                pstmt.setString(6,s.getTitle());
+
+
+
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
