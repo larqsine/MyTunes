@@ -1,6 +1,8 @@
+package gui.controller;
+
 import javafx.scene.control.Label;
 
-public class DeleteViewController {
+public class NewViewController {
     private Label label;
 }
 
