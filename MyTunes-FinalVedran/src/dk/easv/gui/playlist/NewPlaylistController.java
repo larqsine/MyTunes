@@ -1,6 +1,7 @@
 package dk.easv.gui.playlist;
 
 import dk.easv.BE.Playlist;
+import dk.easv.BLL.PlaylistBL;
 import dk.easv.gui.FxmlViewController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -19,6 +20,8 @@ public class NewPlaylistController {
     }
 
     public void ClickSaveBTN(ActionEvent actionEvent) {
+        PlaylistBL playlistBL=new PlaylistBL();
+        playlistBL.checkField(NewPlaylistInput);
 
         f.PlaylistListView.getItems().add(NewPlaylistInput.getText());
         Stage stage = (Stage) BTNCancleNewPlaylist.getScene().getWindow();

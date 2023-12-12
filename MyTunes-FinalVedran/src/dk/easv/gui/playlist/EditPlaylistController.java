@@ -2,6 +2,7 @@ package dk.easv.gui.playlist;
 
 import dk.easv.BE.Playlist;
 import dk.easv.BE.SongClass;
+import dk.easv.BLL.PlaylistBL;
 import dk.easv.gui.FxmlViewController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +22,9 @@ public class EditPlaylistController {
     }
 
     public void ClickSavePlaylistBTN(ActionEvent actionEvent) {
+        PlaylistBL playlistBL=new PlaylistBL();
+        playlistBL.checkField(EditPlaylistInput);
+
         ObservableList<String> allPlaylists;
         allPlaylists = f.PlaylistListView.getItems();
 
