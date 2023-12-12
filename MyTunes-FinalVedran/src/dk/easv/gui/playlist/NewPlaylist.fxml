@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.gui.playlist.NewPlaylistController">
+   <children>
+      <Label layoutX="247.0" layoutY="31.0" text="New Playlist">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="139.0" layoutY="134.0" text="Name:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="NewPlaylistInput" layoutX="198.0" layoutY="135.0" prefHeight="26.0" prefWidth="206.0" />
+      <Button fx:id="SaveNewPlaylist" layoutX="353.0" layoutY="297.0" mnemonicParsing="false" onAction="#ClickSaveBTN" text="Save" />
+      <Button fx:id="BTNCancleNewPlaylist" layoutX="198.0" layoutY="297.0" mnemonicParsing="false" onAction="#ClickCancleBTN" text="Cancle" />
+   </children>
+</AnchorPane>

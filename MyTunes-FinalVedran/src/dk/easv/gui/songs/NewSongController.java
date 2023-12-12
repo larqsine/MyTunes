@@ -14,8 +14,6 @@ import javafx.stage.Window;
 import java.io.File;
 import java.io.IOException;
 
-import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.title;
-
 public class NewSongController {
     public Button BTNCancleNewSong;
     public Button BTNSaveSong;
@@ -56,7 +54,7 @@ public class NewSongController {
         songClass.setTime(Double.parseDouble(TimeInput.getText()));
         songClass.setFile(FileInput.getText());
         songBL.saveSong(songClass);
-        f.loadData();
+        f.loadSongData();
         Stage currentStage = (Stage) BTNCancleNewSong.getScene().getWindow();
         currentStage.close();
 

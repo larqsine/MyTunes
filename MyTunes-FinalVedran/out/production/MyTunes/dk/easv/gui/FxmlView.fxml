@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -30,15 +31,14 @@
       <Label layoutX="22.0" layoutY="118.0" text="Playlists" textFill="WHITE" />
       <Label layoutX="204.0" layoutY="118.0" text="Songs on Playlist" textFill="WHITE" />
       <Label layoutX="414.0" layoutY="118.0" text="Songs" textFill="WHITE" />
-      <VBox layoutX="22.0" layoutY="141.0" prefHeight="200.0" prefWidth="152.0" style="-fx-border-color: white;" />
       <VBox layoutX="205.0" layoutY="139.0" prefHeight="200.0" prefWidth="152.0" style="-fx-border-color: white;" />
       <Button focusTraversable="false" layoutX="371.0" layoutY="139.0" mnemonicParsing="false" text="&lt;-" />
       <Label layoutX="512.0" layoutY="22.0" text="Filter:" textFill="WHITE" />
       <TextField fx:id="SearchBar" focusTraversable="false" layoutX="551.0" layoutY="17.0" prefHeight="26.0" prefWidth="89.0" promptText="Key Words" />
       <Button focusTraversable="false" layoutX="646.0" layoutY="17.0" mnemonicParsing="false" text="0-" />
-      <Button focusTraversable="false" layoutX="21.0" layoutY="351.0" mnemonicParsing="false" text="New" />
-      <Button focusTraversable="false" layoutX="74.0" layoutY="351.0" mnemonicParsing="false" text="Edit" />
-      <Button focusTraversable="false" layoutX="122.0" layoutY="351.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="BTNNewPlaylist" focusTraversable="false" layoutX="21.0" layoutY="351.0" mnemonicParsing="false" onAction="#ClickNewPlaylistBTN" text="New" />
+      <Button fx:id="BTNEditPlaylist" focusTraversable="false" layoutX="74.0" layoutY="351.0" mnemonicParsing="false" onAction="#ClickEditPlaylistBTN" text="Edit" />
+      <Button fx:id="BTNDeletePlaylist" focusTraversable="false" layoutX="122.0" layoutY="351.0" mnemonicParsing="false" onAction="#ClickDeletePlaylistBTN" text="Delete" />
       <Button focusTraversable="false" layoutX="204.0" layoutY="351.0" mnemonicParsing="false" text="Up" />
       <Button focusTraversable="false" layoutX="248.0" layoutY="351.0" mnemonicParsing="false" text="Down" />
       <Button focusTraversable="false" layoutX="306.0" layoutY="351.0" mnemonicParsing="false" text="Delete" />
@@ -54,5 +54,6 @@
             <TableColumn fx:id="TableViewTime" prefWidth="75.0" text="Time" />
         </columns>
       </TableView>
+      <ListView fx:id="PlaylistListView" layoutX="20.0" layoutY="139.0" prefHeight="200.0" prefWidth="168.0" />
    </children>
 </AnchorPane>

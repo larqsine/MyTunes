@@ -3,6 +3,9 @@ package dk.easv.gui;
 import dk.easv.BE.SongClass;
 import dk.easv.BLL.SongBL;
 import dk.easv.DAL.SongDAO;
+import dk.easv.gui.playlist.DeletePlaylistController;
+import dk.easv.gui.playlist.EditPlaylistController;
+import dk.easv.gui.playlist.NewPlaylistController;
 import dk.easv.gui.songs.DeleteSongController;
 import dk.easv.gui.songs.EditSongController;
 import dk.easv.gui.songs.NewSongController;
@@ -12,7 +15,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -44,6 +47,11 @@ public class FxmlViewController implements Initializable {
     public TextField SearchBar;
 
     public   ObservableList<SongClass> songList;
+    public Button BTNNewPlaylist;
+    public ListView PlaylistListView;
+    public Button BTNEditPlaylist;
+    public Button BTNDeletePlaylist;
+
     //FXML
     @FXML
     private Label mainLabel;
@@ -90,7 +98,7 @@ public class FxmlViewController implements Initializable {
         });
         // Seting info in table view
         songList = FXCollections.observableArrayList();
-        loadData();
+        loadSongData();
 
         //Serach Bar
         search();
@@ -202,7 +210,7 @@ public class FxmlViewController implements Initializable {
     }
 
 
-     public void loadData(){
+     public void loadSongData(){
 
          TableViewTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
          TableViewArtist.setCellValueFactory(new PropertyValueFactory<>("Artist"));
@@ -214,8 +222,9 @@ public class FxmlViewController implements Initializable {
 
      }
 
+
      public void search(){
-         loadData();
+         loadSongData();
          FilteredList<SongClass> filteredSongs = new FilteredList<>(s.getSonglist(), b -> true);
 
          SearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -242,4 +251,49 @@ public class FxmlViewController implements Initializable {
          sortedSongs.comparatorProperty().bind(tableView.comparatorProperty());
          tableView.setItems(sortedSongs);
      }
+
+    public void ClickNewPlaylistBTN(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dk/easv/gui/playlist/NewPlaylist.fxml"));
+        Parent root4 = (Parent) fxmlLoader.load();
+        NewPlaylistController newPlaylistController= fxmlLoader.getController();
+        newPlaylistController.setFxmlViewController(this);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root4));
+        stage.show();
+    }
+
+    public void ClickEditPlaylistBTN(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dk/easv/gui/playlist/EditPlaylist.fxml"));
+        Parent root5 = (Parent) fxmlLoader.load();
+        EditPlaylistController editPlaylistController= fxmlLoader.getController();
+        editPlaylistController.setFxmlViewController(this);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root5));
+        stage.show();
+    }
+
+    public void ClickDeletePlaylistBTN(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dk/easv/gui/playlist/DeletePlaylist.fxml"));
+        Parent root6 = (Parent) fxmlLoader.load();
+        DeletePlaylistController deletePlaylistController= fxmlLoader.getController();
+        deletePlaylistController.setFxmlViewController(this);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root6));
+        stage.show();
+        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationDialog.setTitle("Confirmation");
+        confirmationDialog.setHeaderText("Are you sure you want to delete?");
+        confirmationDialog.setContentText("Any unsaved changes will be lost.");
+        Optional<ButtonType> result = confirmationDialog.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Get the index of the selected playlist
+            int selectedIndex = PlaylistListView.getSelectionModel().getSelectedIndex();
+
+            // Remove the selected playlist from the list
+            PlaylistListView.getItems().remove(selectedIndex);
+
+            stage.close();
+        }
+    }
 }
