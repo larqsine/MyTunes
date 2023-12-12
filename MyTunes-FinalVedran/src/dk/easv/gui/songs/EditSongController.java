@@ -49,6 +49,8 @@ public class EditSongController {
         songBL.checkField(ArtistInput, "Artist");
         songBL.checkField(CategoryInput, "Category");
 
+        if(songBL.saveNumber==1){
+
         ObservableList<SongClass> allSongs, selectedSong;
         allSongs = f.tableView.getItems();
         selectedSong = f.tableView.getSelectionModel().getSelectedItems();
@@ -64,6 +66,7 @@ public class EditSongController {
             f.tableView.refresh();
             Stage currentStage = (Stage) BTNCancleEditSong.getScene().getWindow();
             currentStage.close();
+        }
         }
     }
 

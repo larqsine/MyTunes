@@ -46,17 +46,18 @@ public class NewSongController {
         songBL.checkField(CategoryInput, "Category");
 
 
-
-        SongClass songClass = new SongClass();
-        songClass.setTitle(TitleInput.getText());
-        songClass.setArtist(ArtistInput.getText());
-        songClass.setCategory(CategoryInput.getText());
-        songClass.setTime(Double.parseDouble(TimeInput.getText()));
-        songClass.setFile(FileInput.getText());
-        songBL.saveSong(songClass);
-        f.loadSongData();
-        Stage currentStage = (Stage) BTNCancleNewSong.getScene().getWindow();
-        currentStage.close();
+       if(songBL.saveNumber == 1) {
+           SongClass songClass = new SongClass();
+           songClass.setTitle(TitleInput.getText());
+           songClass.setArtist(ArtistInput.getText());
+           songClass.setCategory(CategoryInput.getText());
+           songClass.setTime(Double.parseDouble(TimeInput.getText()));
+           songClass.setFile(FileInput.getText());
+           songBL.saveSong(songClass);
+           f.loadSongData();
+           Stage currentStage = (Stage) BTNCancleNewSong.getScene().getWindow();
+           currentStage.close();
+       }
 
 
     }
