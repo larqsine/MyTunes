@@ -18,7 +18,7 @@ public class SongBL {
 
     private ObservableList<SongClass> songlist;
 
-
+   private SongClass EditSong;
 
     SongDAO songDAO=new SongDAO();
 
@@ -54,9 +54,9 @@ public class SongBL {
 
          songDAO.createSong(s);
      }
-     public void updateSong(SongClass s){
+     public void updateSong(SongClass s, String oldTitle, String oldArtist){
 
-     songDAO.updateSong(s);
+     songDAO.updateSong(s, oldTitle, oldArtist);
      }
 
 
@@ -69,4 +69,12 @@ public class SongBL {
      songlist.addAll(getAllSongs());
      return songlist;
  }
+
+    public void songToBeEdited(SongClass selectedItem) {
+      this.EditSong= selectedItem;
+    }
+
+    public SongClass getSongToBeEdited() {
+     return EditSong;
+    }
 }

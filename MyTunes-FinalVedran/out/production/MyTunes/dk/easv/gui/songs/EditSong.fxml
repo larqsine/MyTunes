@@ -46,5 +46,10 @@
         <Button fx:id="BTNCancleEditSong" layoutX="121.0" layoutY="262.0" mnemonicParsing="false" onAction="#ClickCancle" text="Cancle" />
         <Button fx:id="BTNSaveSong" layoutX="196.0" layoutY="262.0" mnemonicParsing="false" onAction="#ClickSave" text="Save" />
       <Button fx:id="BTNChoose" layoutX="274.0" layoutY="207.0" mnemonicParsing="false" onAction="#ClickChoose" text="Choose" />
+      <Label layoutX="120.0" layoutY="37.0" text="The song will be edited when you restart a program">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

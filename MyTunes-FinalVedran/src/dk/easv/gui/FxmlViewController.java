@@ -25,7 +25,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -72,13 +71,15 @@ public class FxmlViewController implements Initializable {
     private MediaPlayer mediaPlayer;
     private int songNumber;
 
-    private SongBL s;
+    private SongBL songBL;
 
     private PlaylistBL p;
 
+    private  SortedList<SongClass> sortedSongs;
+
     public void setSongBL(SongBL songBL) {
 
-        this.s = songBL;
+        this.songBL = songBL;
     }
     public void setPlaylistBL(PlaylistBL playlistBL) {
 
@@ -116,7 +117,8 @@ public class FxmlViewController implements Initializable {
         loadPlaylistData();
 
         //Serach Bar
-        search();
+        SearchBar.textProperty().addListener((observable, oldValue, newValue) -> search());
+
 
 
 
@@ -180,13 +182,16 @@ public class FxmlViewController implements Initializable {
     }
 
     public void ClickEditBTN(ActionEvent actionEvent) throws IOException {
+        songBL.songToBeEdited(tableView.getSelectionModel().getSelectedItem());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("songs/EditSong.fxml"));
         Parent root2 = (Parent) fxmlLoader.load();
         EditSongController editSongController= fxmlLoader.getController();
         editSongController.setFxmlViewController(this);
+        editSongController.setSongBL(songBL);
         Stage stage = new Stage();
         stage.setScene(new Scene(root2));
         stage.show();
+
     }
 
     public void ClickDeleteBTN(ActionEvent actionEvent) throws IOException {
@@ -232,7 +237,7 @@ public class FxmlViewController implements Initializable {
          TableViewCategory.setCellValueFactory(new PropertyValueFactory<>("Category"));
          TableViewTime.setCellValueFactory(new PropertyValueFactory<>("Time"));
          tableView.getColumns().addAll();
-         tableView.setItems(s.getSonglist());
+         tableView.setItems(songBL.getSonglist());
          tableView.refresh();
 
      }
@@ -245,16 +250,16 @@ public class FxmlViewController implements Initializable {
 
 
      public void search(){
-         loadSongData();
-         FilteredList<SongClass> filteredSongs = new FilteredList<>(s.getSonglist(), b -> true);
 
-         SearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+         FilteredList<SongClass> filteredSongs = new FilteredList<>(songBL.getSonglist(), b -> true);
+          String searchText = SearchBar.getText();
+
              filteredSongs.setPredicate(songClass -> {
-                 if (newValue == null || newValue.isEmpty()) {
+                 if (searchText == null || searchText.isEmpty()) {
                      return true;
                  }
 
-                 String lowerCaseFilter = newValue.toLowerCase();
+                 String lowerCaseFilter = searchText.toLowerCase();
 
                  String title = songClass.getTitle();
                  String artist = songClass.getArtist();
@@ -266,11 +271,11 @@ public class FxmlViewController implements Initializable {
 
                  return titleMatches || artistMatches || categoryMatches;
              });
-         });
 
-         SortedList<SongClass> sortedSongs = new SortedList<>(filteredSongs);
-         sortedSongs.comparatorProperty().bind(tableView.comparatorProperty());
+         ObservableList<SongClass> sortedSongs= FXCollections.observableArrayList();
+         sortedSongs.addAll(filteredSongs);
          tableView.setItems(sortedSongs);
+
      }
 
     public void ClickNewPlaylistBTN(ActionEvent actionEvent) throws IOException {

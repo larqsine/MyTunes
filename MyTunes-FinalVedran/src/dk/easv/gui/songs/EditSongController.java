@@ -29,6 +29,7 @@ public class EditSongController {
     public Button BTNChoose;
     public TextField FileInput;
 
+     private SongBL songBL;
     private FxmlViewController f;
 
 
@@ -38,34 +39,39 @@ public class EditSongController {
         // do what you have to do
         stage.close();
     }
+
+    public void setSongBL( SongBL songBL){
+
+        this.songBL= songBL;
+    }
     public void setFxmlViewController( FxmlViewController fxmlViewController){
 
         this.f=fxmlViewController;
     }
 
     public void ClickSave(ActionEvent actionEvent) throws IOException {
-        SongBL songBL = new SongBL();
+
         songBL.checkField(TitleInput, "Title");
         songBL.checkField(ArtistInput, "Artist");
         songBL.checkField(CategoryInput, "Category");
 
         if(songBL.saveNumber==1){
 
-        ObservableList<SongClass> allSongs, selectedSong;
-        allSongs = f.tableView.getItems();
-        selectedSong = f.tableView.getSelectionModel().getSelectedItems();
-        if (!selectedSong.isEmpty()) {
 
-            SongClass songClass = selectedSong.get(0);
+        SongClass selectedSong = songBL.getSongToBeEdited();
+        if (selectedSong != null) {
+             String oldTitle = selectedSong.getTitle();
+             String oldArtist = selectedSong.getArtist();
+            SongClass songClass = new SongClass();
             songClass.setTitle(TitleInput.getText());
             songClass.setArtist(ArtistInput.getText());
             songClass.setCategory(CategoryInput.getText());
             songClass.setTime(Double.parseDouble(TimeInput.getText()));
             songClass.setFile(FileInput.getText());
-            songBL.updateSong(songClass);
-            f.tableView.refresh();
+            songBL.updateSong(songClass, oldTitle, oldArtist);
             Stage currentStage = (Stage) BTNCancleEditSong.getScene().getWindow();
             currentStage.close();
+            f.tableView.refresh();
         }
         }
     }

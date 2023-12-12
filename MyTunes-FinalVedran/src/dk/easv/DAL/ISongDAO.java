@@ -9,7 +9,7 @@ public interface ISongDAO {
 
     public SongClass getSong(int id);
     public void createSong(SongClass s);
-    public void updateSong(SongClass s);
+    public void updateSong(SongClass s, String oldTitle, String oldArtist);
     public void deleteSong(String title, String artist);
 
     public List<SongClass> getAllSongs();

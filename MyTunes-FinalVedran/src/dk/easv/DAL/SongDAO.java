@@ -68,9 +68,9 @@ public class SongDAO implements ISongDAO{
     }
 
     @Override
-    public void updateSong(SongClass s) {
+    public void updateSong(SongClass s, String oldTitle, String oldArtist) {
         try (Connection con = cm.getConnection()) {
-            String sql = "UPDATE Song SET Title=?, Artist=?, Category=?, Time=?, [File]=? WHERE Title=? ";
+            String sql = "UPDATE Song SET Title=?, Artist=?, Category=?, Time=?, [File]=? WHERE Title=? AND Artist=? ";
             try (PreparedStatement pstmt = con.prepareStatement(sql)) {
                 pstmt.setString(1, String.valueOf(s.getTitle()));
                 pstmt.setString(2, String.valueOf(s.getArtist()));
@@ -84,7 +84,8 @@ public class SongDAO implements ISongDAO{
                 }
 
                 pstmt.setString(5,String.valueOf(s.getFile()));
-                pstmt.setString(6,s.getTitle());
+                pstmt.setString(6, oldTitle);
+                pstmt.setString(7, oldArtist);
 
 
 
