@@ -25,21 +25,25 @@ public class EditPlaylistController {
         PlaylistBL playlistBL=new PlaylistBL();
         playlistBL.checkField(EditPlaylistInput);
 
-        ObservableList<String> allPlaylists;
-        allPlaylists = f.PlaylistListView.getItems();
+        if(playlistBL.saveNumber==1) {
 
-        // Get the index of the selected playlist
-        int selectedIndex = f.PlaylistListView.getSelectionModel().getSelectedIndex();
+            ObservableList<String> allPlaylists;
+            allPlaylists = f.PlaylistListView.getItems();
 
-        // Update the playlist name with the edited text
-        String editedPlaylistName = EditPlaylistInput.getText();
+            // Get the index of the selected playlist
+            int selectedIndex = f.PlaylistListView.getSelectionModel().getSelectedIndex();
 
-        // Replace the selected playlist name in the list
-        allPlaylists.set(selectedIndex, editedPlaylistName);
+            // Update the playlist name with the edited text
+            String editedPlaylistName = EditPlaylistInput.getText();
 
-        // Close the stage
-        Stage stage = (Stage) BTNCancleEditPlaylist.getScene().getWindow();
-        stage.close();
+            // Replace the selected playlist name in the list
+            allPlaylists.set(selectedIndex, editedPlaylistName);
+
+            // Close the stage
+            Stage stage = (Stage) BTNCancleEditPlaylist.getScene().getWindow();
+            stage.close();
+        }
+
 
 
     }

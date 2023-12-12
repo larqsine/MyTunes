@@ -23,9 +23,12 @@ public class NewPlaylistController {
         PlaylistBL playlistBL=new PlaylistBL();
         playlistBL.checkField(NewPlaylistInput);
 
-        f.PlaylistListView.getItems().add(NewPlaylistInput.getText());
-        Stage stage = (Stage) BTNCancleNewPlaylist.getScene().getWindow();
-        stage.close();
+        if(playlistBL.saveNumber==1) {
+
+            f.PlaylistListView.getItems().add(NewPlaylistInput.getText());
+            Stage stage = (Stage) BTNCancleNewPlaylist.getScene().getWindow();
+            stage.close();
+        }
 
 
     }

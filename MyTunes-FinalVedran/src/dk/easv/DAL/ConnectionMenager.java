@@ -41,7 +41,7 @@ public class ConnectionMenager {
 
 
         try (Connection con = ds.getConnection()) {
-            String sql = "SELECT * FROM Song";
+            String sql = "SELECT * FROM Song ";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -58,6 +58,34 @@ public class ConnectionMenager {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void conenctPlaylist(){
+        ds = new SQLServerDataSource();
+        ds.setDatabaseName("MyTunes-vedrancop");
+        ds.setUser("CSe2023b_e_27");
+        ds.setPassword("CSe2023bE27#23");
+        ds.setPortNumber(1433);
+        ds.setServerName("10.176.111.34");
+        ds.setTrustServerCertificate(true);
+
+
+        System.out.println("Done");
+
+
+        try (Connection con = ds.getConnection()) {
+            String sql = "SELECT * FROM Playlist ";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                String name = rs.getString("Name");
+
+
+                System.out.println(name);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Connection getConnection() throws SQLServerException {

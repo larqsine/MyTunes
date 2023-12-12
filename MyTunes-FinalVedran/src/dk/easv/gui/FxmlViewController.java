@@ -1,6 +1,8 @@
 package dk.easv.gui;
 
+import dk.easv.BE.Playlist;
 import dk.easv.BE.SongClass;
+import dk.easv.BLL.PlaylistBL;
 import dk.easv.BLL.SongBL;
 import dk.easv.DAL.SongDAO;
 import dk.easv.gui.playlist.DeletePlaylistController;
@@ -47,6 +49,8 @@ public class FxmlViewController implements Initializable {
     public TextField SearchBar;
 
     public   ObservableList<SongClass> songList;
+
+    public  ObservableList<Playlist> playlists;
     public Button BTNNewPlaylist;
     public ListView PlaylistListView;
     public Button BTNEditPlaylist;
@@ -70,15 +74,22 @@ public class FxmlViewController implements Initializable {
 
     private SongBL s;
 
+    private PlaylistBL p;
+
     public void setSongBL(SongBL songBL) {
 
         this.s = songBL;
+    }
+    public void setPlaylistBL(PlaylistBL playlistBL) {
+
+        this.p = playlistBL;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //INITIALIZE
         setSongBL(new SongBL());
+        setPlaylistBL(new PlaylistBL());
         directory = new File("Music");
         files = directory.listFiles();
         songs = new ArrayList<>(Arrays.asList(files));
@@ -99,6 +110,10 @@ public class FxmlViewController implements Initializable {
         // Seting info in table view
         songList = FXCollections.observableArrayList();
         loadSongData();
+
+        //Seting info in Playlist
+        playlists=FXCollections.observableArrayList();
+        loadPlaylistData();
 
         //Serach Bar
         search();
@@ -220,6 +235,12 @@ public class FxmlViewController implements Initializable {
          tableView.setItems(s.getSonglist());
          tableView.refresh();
 
+     }
+
+     public void loadPlaylistData(){
+        PlaylistListView.setItems(p.getPlaylists());
+        PlaylistListView.getItems().addAll();
+        PlaylistListView.refresh();
      }
 
 
