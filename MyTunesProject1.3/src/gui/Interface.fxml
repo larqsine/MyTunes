@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="tableOfSongs" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceController">
+   <children>
+      <Label layoutX="29.0" layoutY="157.0" text="Playlists">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="213.0" layoutY="157.0" text="Songs on Playlist">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="433.0" layoutY="157.0" text="Songs">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listOfPlaylists" focusTraversable="false" layoutX="29.0" layoutY="204.0" prefHeight="291.0" prefWidth="159.0" />
+      <ListView fx:id="listOfSongsOnPlaylist" focusTraversable="false" layoutX="213.0" layoutY="204.0" prefHeight="291.0" prefWidth="159.0" />
+      <Label fx:id="songLabel" layoutX="280.0" layoutY="21.0" text="YourSongName">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Button focusTraversable="false" layoutX="81.0" layoutY="30.0" mnemonicParsing="false" onAction="#playSong" text="▶️" />
+      <Button focusTraversable="false" layoutX="115.0" layoutY="30.0" mnemonicParsing="false" onAction="#pauseSong" text="=" />
+      <ProgressBar fx:id="progressBar" focusTraversable="false" layoutX="9.0" layoutY="65.0" prefWidth="200.0" progress="0.0" />
+      <Slider fx:id="volumeSlider" focusTraversable="false" layoutX="45.0" layoutY="92.0" value="50.0" />
+      <Button focusTraversable="false" layoutX="29.0" layoutY="504.0" mnemonicParsing="false" onAction="#newPlaylistWindow" text="New" />
+      <Button focusTraversable="false" layoutX="84.0" layoutY="504.0" mnemonicParsing="false" onAction="#editPlaylistWindow" text="Edit" />
+      <Button focusTraversable="false" layoutX="135.0" layoutY="504.0" mnemonicParsing="false" onAction="#deleteThePlaylist" text="Delete" />
+      <Button fx:id="MoveUpBTN" focusTraversable="false" layoutX="213.0" layoutY="504.0" mnemonicParsing="false" onAction="#ClickMoveUpBTN" text="Up" />
+      <Button fx:id="MoveDownBTN" focusTraversable="false" layoutX="258.0" layoutY="504.0" mnemonicParsing="false" onAction="#ClickMoveDownBTN" text="Down" />
+      <Button fx:id="DeleteSongOnPlaylistBTN" focusTraversable="false" layoutX="319.0" layoutY="504.0" mnemonicParsing="false" onAction="#ClickDeketeSongOnPlaylistBTN" text="Delete" />
+      <Button focusTraversable="false" layoutX="433.0" layoutY="504.0" mnemonicParsing="false" onAction="#windowNewSong" text="New" />
+      <Button focusTraversable="false" layoutX="489.0" layoutY="504.0" mnemonicParsing="false" onAction="#windowEditSong" text="Edit" />
+      <Button focusTraversable="false" layoutX="539.0" layoutY="504.0" mnemonicParsing="false" onAction="#deleteSong" text="Delete" />
+      <Button focusTraversable="false" layoutX="719.0" layoutY="504.0" mnemonicParsing="false" onAction="#closeApplication" text="Close" />
+      <ListView fx:id="listOfSongs" focusTraversable="false" layoutX="433.0" layoutY="204.0" prefHeight="291.0" prefWidth="331.0" />
+      <Label layoutX="571.0" layoutY="30.0" text="Filter:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="filterTextField" focusTraversable="false" layoutX="622.0" layoutY="30.0" prefHeight="26.0" prefWidth="109.0" />
+      <Button focusTraversable="false" layoutX="744.0" layoutY="30.0" mnemonicParsing="false" onAction="#searchSong" text="0-" />
+      <Button focusTraversable="false" layoutX="744.0" layoutY="62.0" mnemonicParsing="false" onAction="#searchAllSongs" text="-0" />
+      <Button focusTraversable="false" layoutX="28.0" layoutY="548.0" mnemonicParsing="false" onAction="#initializeBtn" text="INITIALIZE" />
+   </children>
+</AnchorPane>
