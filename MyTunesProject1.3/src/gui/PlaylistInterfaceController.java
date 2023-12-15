@@ -1,6 +1,7 @@
 package gui;
 
 import be.Playlist;
+import be.Song;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -12,9 +13,21 @@ public class PlaylistInterfaceController {
 
     @FXML
     private TextField nameOfPlaylist, amountOfPlaylistSongs, timeOfPlaylist;
+    public String name, playlistTime;
+    public int songs;
+    public Playlist selectedPlaylist;
+
+    @FXML
+    public void initialize() {
+        setTheDataToTheTextFields();
+    }
 
     public void setListOfPlaylists(ListView<Playlist> listOfPlaylists) {
         this.listOfPlaylists = listOfPlaylists;
+    }
+
+    public void setSelectedSong(Playlist selectedPlaylist) {
+        this.selectedPlaylist = selectedPlaylist;
     }
 
     @FXML
@@ -30,6 +43,22 @@ public class PlaylistInterfaceController {
     }
 
     @FXML
-    private void editPlaylist() {
+    public void editPlaylist() {
+        listOfPlaylists.getItems().add(selectedPlaylist);
+        saveNewAttributesOfThePlaylist();
+    }
+
+    public void setTheDataToTheTextFields() {
+        nameOfPlaylist.setText(name);
+        amountOfPlaylistSongs.setText(String.valueOf(songs));
+        timeOfPlaylist.setText(playlistTime);
+    }
+
+    public void saveNewAttributesOfThePlaylist() {
+        System.out.println("here: " + selectedPlaylist);
+
+        selectedPlaylist.setName(nameOfPlaylist.getText());
+        selectedPlaylist.setTime(timeOfPlaylist.getText());
+        selectedPlaylist.setSongs(Integer.parseInt(amountOfPlaylistSongs.getText()));
     }
 }

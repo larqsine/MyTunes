@@ -56,6 +56,6 @@
       <TextField fx:id="filterTextField" focusTraversable="false" layoutX="622.0" layoutY="30.0" prefHeight="26.0" prefWidth="109.0" />
       <Button focusTraversable="false" layoutX="744.0" layoutY="30.0" mnemonicParsing="false" onAction="#searchSong" text="0-" />
       <Button focusTraversable="false" layoutX="744.0" layoutY="62.0" mnemonicParsing="false" onAction="#searchAllSongs" text="-0" />
-      <Button focusTraversable="false" layoutX="135.0" layoutY="540.0" mnemonicParsing="false" onAction="#getPlaylistDelete" text="getPlaylist" />
+      <Button focusTraversable="false" layoutX="28.0" layoutY="548.0" mnemonicParsing="false" onAction="#initializeBtn" text="INITIALIZE" />
    </children>
 </AnchorPane>

@@ -45,10 +45,13 @@ public class InterfaceController {
     private Song selectedSong;
     public String title, artist, category, time;
     public String newTitle, newArtist, newCategory, newTime;
+    public String name, playlistTime;
+    public int songs;
 
     public InterfaceController() {
         this.databaseManager = new DatabaseManager(new DatabaseData());
         this.fileManager = new FileManager();
+
     }
 
     @FXML
@@ -58,7 +61,12 @@ public class InterfaceController {
         setTheSong();
         selectTheSong();
         getTheSong();
-        getThePlaylist();
+        //getThePlaylist();
+    }
+
+    @FXML
+    public void initializeBtn() {
+        getTheSelectedPlaylist();
     }
 
     private void loadAllSongsFromPlaylists() {
@@ -200,17 +208,14 @@ public class InterfaceController {
             songController.setListOfSongs(listOfSongs);
             Song selected = listOfSongs.getSelectionModel().getSelectedItem();
             songController.setSelectedSong(selected);
+
             songController.title = title;
             songController.artist = artist;
             songController.category = category;
             songController.time = time;
-            songController.setTheStringsToTextFields();
+
 
             songController.initialize();
-            songController.newTitle = newTitle;
-            songController.newArtist = newArtist;
-            songController.newCategory = newCategory;
-            songController.newTime = newTime;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -244,6 +249,18 @@ public class InterfaceController {
             newPlaylistStage.setScene(newPlaylistScene);
             newPlaylistStage.setTitle("New/Edit Playlist");
             newPlaylistStage.show();
+
+
+
+            PlaylistInterfaceController playlistInterfaceController = loader.getController();
+            playlistInterfaceController.setListOfPlaylists(listOfPlaylists);
+            Playlist selected = listOfPlaylists.getSelectionModel().getSelectedItem();
+
+            playlistInterfaceController.setSelectedSong(selected);
+            playlistInterfaceController.name = name;
+            playlistInterfaceController.playlistTime = playlistTime;
+            playlistInterfaceController.songs = songs;
+            playlistInterfaceController.initialize();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -269,6 +286,7 @@ public class InterfaceController {
         listOfPlaylists.getItems().remove(listOfPlaylists.getSelectionModel().getSelectedItem());
     }
 
+    //this method does not need to work
     private void getThePlaylist() {
         listOfPlaylists.setOnMouseClicked(event -> {
             if(event.getClickCount() == 1) {
@@ -295,10 +313,11 @@ public class InterfaceController {
         });
     }
 
+    //To get strings of the playlist for edit button
     private void getAttributesOfThePlaylist(Playlist playlist) {
-        String name = playlist.getName();
-        int songs = playlist.getSongs();
-        String time = playlist.getTime();
+        name = playlist.getName();
+        songs = playlist.getSongs();
+        playlistTime = playlist.getTime();
     }
 
     private void getTheSelectedPlaylist() {
