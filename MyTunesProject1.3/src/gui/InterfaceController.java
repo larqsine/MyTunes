@@ -57,7 +57,7 @@ public class InterfaceController {
     @FXML
     public void initialize() {
         loadAllDataFromDatabase();
-        loadAllSongsFromPlaylists();
+        //loadAllSongsFromPlaylists();
         setTheSong();
         selectTheSong();
         getTheSong();
@@ -67,6 +67,11 @@ public class InterfaceController {
     @FXML
     public void initializeBtn() {
         getTheSelectedPlaylist();
+    }
+
+    @FXML
+    private void openPlaylist() {
+        loadAllSongsFromPlaylists();
     }
 
     private void loadAllSongsFromPlaylists() {
