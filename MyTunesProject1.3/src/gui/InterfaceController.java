@@ -8,6 +8,7 @@ import dal.DatabaseData;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -47,6 +48,8 @@ public class InterfaceController {
     public String newTitle, newArtist, newCategory, newTime;
     public String name, playlistTime;
     public int songs;
+    private int theSongIsChosen;
+    private String songForTransfer;
 
     public InterfaceController() {
         this.databaseManager = new DatabaseManager(new DatabaseData());
@@ -58,7 +61,7 @@ public class InterfaceController {
     public void initialize() {
         loadAllDataFromDatabase();
         //loadAllSongsFromPlaylists();
-        setTheSong();
+        //setTheSong();
         selectTheSong();
         getTheSong();
         //getThePlaylist();
@@ -107,6 +110,11 @@ public class InterfaceController {
                 seekDuration();
             }
         });
+    }
+
+    @FXML
+    private void setTheSongToPlay() {
+        setTheSong();
     }
 
     private void setVolumeSlider() {
@@ -332,5 +340,56 @@ public class InterfaceController {
                 getAttributesOfThePlaylist(selectedPlaylist);
             }
         });
+    }
+
+    @FXML
+    private void moveUpTheSong() {
+        if (theSongIsChosen > 0) {
+            swapSongs(theSongIsChosen, theSongIsChosen - 1);
+            theSongIsChosen--;
+        }
+    }
+
+    @FXML
+    private void moveDownTheSong() {
+        if (theSongIsChosen < listOfSongsOnPlaylist.getItems().size() - 1) {
+            swapSongs(theSongIsChosen, theSongIsChosen + 1);
+            theSongIsChosen++;
+        }
+    }
+
+    private void swapSongs(int index1, int index2) {
+        ObservableList<String> items = listOfSongsOnPlaylist.getItems();
+        String temp = items.get(index1);
+        items.set(index1, items.get(index2));
+        items.set(index2, temp);
+    }
+
+    @FXML
+    private void deleteTheSongFromPlaylist() {
+        listOfSongsOnPlaylist.getItems().remove(listOfSongsOnPlaylist.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    private void getTheSongFromPlaylistToChangeOrder() {
+        listOfSongsOnPlaylist.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1) {
+                theSongIsChosen = listOfSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+            }
+        });
+    }
+
+    @FXML
+    private void prepareTheSongToTransfer() {
+        listOfSongs.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1) {
+                songForTransfer = listOfSongs.getSelectionModel().getSelectedItem().getTitle();
+            }
+        });
+    }
+
+    @FXML
+    private void transferTheSong() {
+        listOfSongsOnPlaylist.getItems().add(songForTransfer);
     }
 }

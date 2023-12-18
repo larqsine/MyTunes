@@ -33,7 +33,7 @@ public class PlaylistInterfaceController {
     @FXML
     private void savePlaylist() {
         String namePlaylist = nameOfPlaylist.getText();
-        int amountSongs = amountOfPlaylistSongs.getAnchor();
+        int amountSongs = Integer.parseInt(amountOfPlaylistSongs.getText());
         String timeSong = timeOfPlaylist.getText();
 
         Playlist newPlaylist = new Playlist(namePlaylist, amountSongs, timeSong);
